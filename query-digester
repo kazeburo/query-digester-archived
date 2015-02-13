@@ -18,12 +18,14 @@ sub find_path {
     $path;
 }
 
+my $limit = 40;
 my $duration = 10;
 Getopt::Long::Configure ("no_ignore_case");
 GetOptions(
     "duration=s" => \$duration,
     "clear-log" => \my $clear_log,
     "stdout" => \my $stdout,
+    "limit" => \$limit,
     "h|help" => \my $help,
 );
 my @mysqlopt = @ARGV;
@@ -95,7 +97,7 @@ my $digest = *STDOUT;
 if ( !$stdout ) {
     open($digest, '>', "$tmpdir/slow_query_$date.digest");
 }
-open(my $pipe, '-|', $pt_query_digest, "$tmpdir/slow_query_$date.log");
+open(my $pipe, '-|', $pt_query_digest, '--limit',$limit,"$tmpdir/slow_query_$date.log");
 while(<$pipe>){
     $digest->print($_);
 }
