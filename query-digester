@@ -25,7 +25,7 @@ GetOptions(
     "duration=s" => \$duration,
     "clear-log" => \my $clear_log,
     "stdout" => \my $stdout,
-    "limit" => \$limit,
+    "limit=s" => \$limit,
     "h|help" => \my $help,
 );
 my @mysqlopt = @ARGV;
